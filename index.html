@@ -1,545 +1,1075 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VoltArmor — Reinforced Cable Protection System</title>
-<meta name="description" content="VoltArmor is a field-installable reinforced sleeve system for EV charging cables — combining UHMWPE fabric and steel wire ropes to resist cutting attempts and deter cable theft.">
-<meta property="og:title" content="VoltArmor — Reinforced Cable Protection System">
-<meta property="og:description" content="Protect your EV charging infrastructure from cable theft. Field-installable, cut-resistant, tested for Enel S.p.A.">
-<meta property="og:image" content="img_product_3.jpeg">
-<meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --red: #D41F1F;
-    --red-dim: #9a1616;
-    --black: #0A0A0A;
-    --charcoal: #141414;
-    --panel: #1A1A1A;
-    --border: #2a2a2a;
-    --text: #E8E4DE;
-    --muted: #7a7570;
-    --white: #F5F1EB;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SECURE_SHIELD // EV-01 — Industrial Defense Systems</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── DESIGN TOKENS ─────────────────────────────────── */
+    :root {
+      --surface:                  #f9f9f9;
+      --surface-dim:              #dadada;
+      --surface-container-low:    #f3f3f4;
+      --surface-container:        #eeeeee;
+      --surface-container-high:   #e8e8e8;
+      --surface-container-highest:#e2e2e2;
+      --on-surface:               #1a1c1c;
+      --on-surface-variant:       #444748;
+      --inverse-surface:          #2f3131;
+      --inverse-on-surface:       #f0f1f1;
+      --outline:                  #747878;
+      --outline-variant:          #c4c7c7;
+      --primary:                  #000000;
+      --on-primary:               #ffffff;
+      --primary-container:        #1c1b1b;
+      --secondary:                #5d5f5f;
+      --on-secondary:             #ffffff;
+      --secondary-container:      #dcdddd;
+      --tertiary:                 #000000;
+      --on-tertiary:              #ffffff;
+      --tertiary-container:       #3e0500;
+      --on-tertiary-container:    #de593e;
+      --copper:                   #de593e;
+      --copper-dim:               #b8401f;
+      --error:                    #ba1a1a;
+      --background:               #f9f9f9;
+      --on-background:            #1a1c1c;
+      --white:                    #ffffff;
+      --card-border:              #dedede;
+      --grid-dot:                 rgba(0,0,0,0.06);
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--black);
-    color: var(--text);
-    font-family: 'Barlow', sans-serif;
-    font-weight: 300;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
+      --font-inter:    'Inter', sans-serif;
+      --font-mono:     'Space Mono', monospace;
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.2rem 3rem;
-    background: rgba(10,10,10,0.92);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.08em; color: var(--white); text-decoration: none; }
-  .nav-logo span { color: var(--red); }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--white); }
-  .nav-cta { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; background: var(--red); color: var(--white); padding: 0.55rem 1.4rem; text-decoration: none; transition: background 0.2s; }
-  .nav-cta:hover { background: var(--red-dim); }
+      --space-1:  8px;
+      --space-2:  16px;
+      --space-3:  24px;
+      --space-4:  32px;
+      --space-5:  40px;
+      --space-6:  48px;
+      --space-8:  64px;
+      --space-10: 80px;
+      --space-12: 96px;
+      --space-16: 128px;
 
-  /* HERO */
-  .hero {
-    min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
-    padding-top: 80px; position: relative; overflow: hidden;
-  }
-  .hero::before {
-    content: ''; position: absolute; inset: 0;
-    background: repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,0.025) 60px),
-                repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.025) 60px);
-    pointer-events: none;
-  }
-  .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 6rem 3rem; position: relative; z-index: 2; }
-  .hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
-  .hero-eyebrow::before { content: ''; display: inline-block; width: 2rem; height: 1px; background: var(--red); }
-  .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4.5rem, 8vw, 8rem); line-height: 0.92; letter-spacing: 0.02em; color: var(--white); margin-bottom: 1rem; }
-  .hero h1 .outline { -webkit-text-stroke: 1.5px var(--white); color: transparent; }
-  .hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 420px; margin-bottom: 3rem; line-height: 1.7; }
-  .hero-actions { display: flex; gap: 1rem; align-items: center; }
-  .btn-primary { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; background: var(--red); color: var(--white); padding: 1rem 2rem; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s, transform 0.15s; display: inline-block; }
-  .btn-primary:hover { background: var(--red-dim); transform: translateY(-1px); }
-  .btn-ghost { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s; }
-  .btn-ghost:hover { color: var(--white); }
-  .hero-stats { display: flex; gap: 2.5rem; margin-top: 4rem; padding-top: 2.5rem; border-top: 1px solid var(--border); }
-  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; color: var(--white); line-height: 1; }
-  .stat-num span { color: var(--red); }
-  .stat-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 0.2rem; }
+      --margin-desktop: 80px;
+      --margin-tablet:  40px;
+      --margin-mobile:  20px;
+    }
 
-  /* HERO RIGHT — real product images */
-  .hero-right { position: relative; overflow: hidden; background: var(--charcoal); border-left: 1px solid var(--border); }
-  .hero-img-grid {
-    position: absolute; inset: 0;
-    display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
-    gap: 1px; background: var(--border);
-  }
-  .hero-img-grid img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.75) contrast(1.05); transition: filter 0.4s; }
-  .hero-img-grid img:hover { filter: brightness(0.9) contrast(1.05); }
-  .hero-badge { position: absolute; bottom: 2rem; left: 2rem; background: rgba(10,10,10,0.88); border: 1px solid var(--border); padding: 1rem 1.5rem; backdrop-filter: blur(6px); }
-  .hero-badge-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.25rem; }
-  .hero-badge-text { font-family: 'Barlow', sans-serif; font-weight: 600; font-size: 0.85rem; color: var(--white); }
+    /* ─── RESET ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-inter);
+      background: var(--background);
+      color: var(--on-surface);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    button { cursor: pointer; border: none; background: none; font: inherit; }
 
-  /* TICKER */
-  .ticker { background: var(--red); overflow: hidden; white-space: nowrap; padding: 0.7rem 0; border-top: 1px solid var(--red-dim); border-bottom: 1px solid var(--red-dim); }
-  .ticker-inner { display: inline-block; animation: ticker 28s linear infinite; }
-  .ticker span { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.85); padding: 0 3rem; }
-  .ticker span::after { content: '▸'; margin-left: 3rem; opacity: 0.5; }
-  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    /* ─── DOT GRID TEXTURE ──────────────────────────────── */
+    .dot-grid {
+      background-image: radial-gradient(circle, var(--grid-dot) 1px, transparent 1px);
+      background-size: 8px 8px;
+    }
 
-  /* SHARED */
-  section { padding: 8rem 3rem; }
-  .section-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
-  .section-label::before { content: ''; width: 1.5rem; height: 1px; background: var(--red); display: inline-block; }
-  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 5vw, 5rem); letter-spacing: 0.03em; line-height: 0.95; color: var(--white); }
+    /* ─── MONOSPACED LABEL ──────────────────────────────── */
+    .label-mono {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+    }
+    .label-mono-bold {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .label-copper {
+      color: var(--copper);
+    }
 
-  /* PRODUCT GALLERY */
-  .gallery-section { background: var(--charcoal); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 6rem 3rem; }
-  .gallery-inner { max-width: 1400px; margin: 0 auto; }
-  .gallery-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: auto auto; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 3rem; }
-  .gallery-item { overflow: hidden; position: relative; }
-  .gallery-item.large { grid-row: span 2; }
-  .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.85); transition: filter 0.4s, transform 0.5s; min-height: 240px; }
-  .gallery-item img:hover { filter: brightness(1); transform: scale(1.03); }
+    /* ─── CROP MARK FRAME ───────────────────────────────── */
+    .frame {
+      position: relative;
+    }
+    .frame::before, .frame::after,
+    .frame > .frame-inner::before,
+    .frame > .frame-inner::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      z-index: 10;
+    }
+    .frame::before  { top: 0;    left: 0;  border-top: 1px solid var(--outline); border-left: 1px solid var(--outline); }
+    .frame::after   { top: 0;    right: 0; border-top: 1px solid var(--outline); border-right: 1px solid var(--outline); }
+    .frame > .frame-inner::before { bottom: 0; left: 0;  border-bottom: 1px solid var(--outline); border-left: 1px solid var(--outline); }
+    .frame > .frame-inner::after  { bottom: 0; right: 0; border-bottom: 1px solid var(--outline); border-right: 1px solid var(--outline); }
 
-  /* PROBLEM */
-  .problem { background: var(--charcoal); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .problem-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
-  .problem-body { font-size: 1rem; color: var(--muted); line-height: 1.8; margin-top: 2rem; }
-  .problem-body strong { color: var(--white); font-weight: 600; }
-  .cost-callout { background: var(--black); border: 1px solid var(--border); border-left: 3px solid var(--red); padding: 2rem; margin-top: 2.5rem; }
-  .cost-num { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: var(--red); line-height: 1; }
-  .cost-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
-  .hotspot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 2.5rem; }
-  .hotspot { background: var(--panel); padding: 1.5rem; transition: background 0.2s; }
-  .hotspot:hover { background: #222; }
-  .hotspot-country { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--white); letter-spacing: 0.05em; }
-  .hotspot-detail { font-size: 0.8rem; color: var(--muted); margin-top: 0.3rem; line-height: 1.5; }
+    /* ─── STATUS INDICATOR ──────────────────────────────── */
+    .status-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+    }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--copper);
+      flex-shrink: 0;
+      animation: pulse-dot 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.85); }
+    }
 
-  /* PRODUCT FEATURES */
-  .product { max-width: 1400px; margin: 0 auto; }
-  .product-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 5rem; }
-  .product-intro { font-size: 1rem; color: var(--muted); line-height: 1.8; margin-top: 1.5rem; }
-  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-  .feature { background: var(--panel); padding: 2.5rem 2rem; position: relative; transition: background 0.2s; }
-  .feature:hover { background: #1e1e1e; }
-  .feature-icon { font-size: 1.8rem; margin-bottom: 1rem; display: block; }
-  .feature-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--white); letter-spacing: 0.04em; margin-bottom: 0.6rem; }
-  .feature-desc { font-size: 0.87rem; color: var(--muted); line-height: 1.65; }
-  .feature-tag { position: absolute; top: 1.5rem; right: 1.5rem; font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; background: rgba(212,31,31,0.15); color: var(--red); padding: 0.25rem 0.6rem; border: 1px solid rgba(212,31,31,0.3); }
+    /* ─── BUTTONS ───────────────────────────────────────── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--primary);
+      color: var(--on-primary);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 14px 24px;
+      border-radius: 999px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: #222; transform: translateY(-1px); }
+    .btn-primary svg { flex-shrink: 0; }
 
-  /* SPECS */
-  .specs-section { background: var(--charcoal); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .specs-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.4fr; gap: 6rem; align-items: start; }
-  .specs-table { margin-top: 2rem; border: 1px solid var(--border); }
-  .spec-row { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
-  .spec-row:last-child { border-bottom: none; }
-  .spec-key { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 1rem 1.25rem; border-right: 1px solid var(--border); background: rgba(0,0,0,0.2); }
-  .spec-val { font-size: 0.88rem; color: var(--white); padding: 1rem 1.25rem; }
-  .install-steps { display: flex; flex-direction: column; gap: 0; margin-top: 2rem; border: 1px solid var(--border); }
-  .install-step { display: flex; gap: 1.5rem; align-items: flex-start; padding: 1.5rem; border-bottom: 1px solid var(--border); transition: background 0.2s; }
-  .install-step:last-child { border-bottom: none; }
-  .install-step:hover { background: rgba(255,255,255,0.02); }
-  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--red); line-height: 1; min-width: 2rem; }
-  .step-title { font-weight: 600; color: var(--white); font-size: 0.9rem; margin-bottom: 0.2rem; }
-  .step-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--primary);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 13px 22px;
+      border: 1px solid var(--primary);
+      border-radius: 999px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-secondary:hover { background: var(--primary); color: var(--on-primary); }
 
-  /* TESTING */
-  .testing-section { max-width: 1400px; margin: 0 auto; }
-  .testing-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 4rem; }
-  .enel-badge { display: inline-flex; align-items: center; gap: 0.75rem; border: 1px solid var(--border); padding: 0.75rem 1.25rem; background: var(--panel); margin-top: 1.5rem; }
-  .enel-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); animation: pulse 2s ease-in-out infinite; }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-  .enel-text { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-  .enel-text strong { color: var(--white); }
-  .threats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
-  .threat-card { background: var(--panel); border: 1px solid var(--border); padding: 1.5rem; }
-  .threat-card.primary { border-top: 2px solid var(--red); }
-  .threat-card.secondary { border-top: 2px solid var(--border); }
-  .threat-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.5rem; }
-  .threat-card.primary .threat-label { color: var(--red); }
-  .threat-card.secondary .threat-label { color: var(--muted); }
-  .threat-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--white); letter-spacing: 0.04em; }
-  .threat-desc { font-size: 0.78rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.5; }
-  .result-bar-section { margin-top: 3rem; background: var(--panel); border: 1px solid var(--border); padding: 2.5rem; }
-  .result-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--white); letter-spacing: 0.05em; margin-bottom: 0.3rem; }
-  .result-subtitle { font-size: 0.8rem; color: var(--muted); margin-bottom: 2rem; }
-  .bar-item { margin-bottom: 1.5rem; }
-  .bar-label-row { display: flex; justify-content: space-between; margin-bottom: 0.4rem; }
-  .bar-name { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-  .bar-val { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--white); }
-  .bar-track { height: 6px; background: var(--border); }
-  .bar-fill { height: 100%; transition: width 1.4s cubic-bezier(0.16,1,0.3,1); width: 0; }
-  .bar-fill.cable-cutter { background: #555; }
-  .bar-fill.scissors { background: #444; }
-  .bar-fill.hand-saw { background: #888; }
-  .bar-fill.grinder { background: var(--red); }
-  .config-note { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--muted); margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); text-transform: uppercase; }
+    /* ─── SECTION UTILITY ───────────────────────────────── */
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--margin-desktop);
+    }
 
-  /* MARKETS */
-  .markets-section { background: var(--charcoal); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .markets-inner { max-width: 1400px; margin: 0 auto; }
-  .markets-header { margin-bottom: 4rem; }
-  .markets-intro { font-size: 1rem; color: var(--muted); max-width: 540px; line-height: 1.8; margin-top: 1.5rem; }
-  .market-tabs { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--border); gap: 1px; background: var(--border); }
-  .market-tab { background: var(--panel); padding: 2rem; transition: background 0.2s; }
-  .market-tab:hover { background: #222; }
-  .market-priority { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 1rem; }
-  .market-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--white); letter-spacing: 0.04em; margin-bottom: 0.75rem; }
-  .market-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
-  .market-examples { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
-  .market-tag { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; background: rgba(255,255,255,0.05); color: var(--muted); padding: 0.2rem 0.6rem; border: 1px solid var(--border); }
+    /* ════════════════════════════════════════════════════════
+       NAV
+    ════════════════════════════════════════════════════════ */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(249,249,249,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--margin-desktop);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+    .nav-logo span {
+      color: var(--on-surface-variant);
+      font-weight: 400;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-cart {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      color: var(--on-surface-variant);
+      transition: color 0.15s;
+    }
+    .nav-cart:hover { color: var(--primary); }
 
-  /* DOWNLOADS */
-  .downloads-section { padding: 6rem 3rem; border-top: 1px solid var(--border); }
-  .downloads-inner { max-width: 1400px; margin: 0 auto; }
-  .downloads-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 3rem; }
-  .download-card { background: var(--panel); padding: 2rem; display: flex; align-items: center; gap: 1.5rem; text-decoration: none; transition: background 0.2s; }
-  .download-card:hover { background: #222; }
-  .dl-icon { font-size: 2rem; flex-shrink: 0; }
-  .dl-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--white); letter-spacing: 0.04em; }
-  .dl-sub { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
-  .dl-arrow { margin-left: auto; font-size: 1.2rem; color: var(--red); flex-shrink: 0; }
+    /* ════════════════════════════════════════════════════════
+       HERO
+    ════════════════════════════════════════════════════════ */
+    .hero {
+      padding-top: 56px;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--space-16) var(--margin-desktop);
+      padding-left: var(--margin-desktop);
+    }
+    .hero-content .section-inner { padding: 0; }
+    .hero-status { margin-bottom: var(--space-4); }
+    .hero-headline {
+      font-size: clamp(48px, 6vw, 80px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      margin-bottom: var(--space-3);
+      max-width: 520px;
+    }
+    .hero-headline em {
+      font-style: normal;
+      color: var(--copper);
+    }
+    .hero-body {
+      font-size: 15px;
+      color: var(--on-surface-variant);
+      line-height: 1.65;
+      max-width: 380px;
+      margin-bottom: var(--space-5);
+    }
+    .hero-cta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+    .hero-price {
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-price-was {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--on-surface-variant);
+      text-decoration: line-through;
+    }
+    .hero-price-now {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--primary);
+    }
 
-  /* CTA */
-  .cta-section { text-align: center; padding: 10rem 3rem; position: relative; overflow: hidden; }
-  .cta-section::before { content: 'VOLTARMOR'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: 'Bebas Neue', sans-serif; font-size: 22vw; color: rgba(255,255,255,0.02); white-space: nowrap; pointer-events: none; }
-  .cta-inner { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
-  .cta-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 6vw, 6rem); line-height: 0.95; color: var(--white); margin-bottom: 1.5rem; }
-  .cta-title .red { color: var(--red); }
-  .cta-body { font-size: 1rem; color: var(--muted); line-height: 1.75; margin-bottom: 3rem; }
-  .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    /* Hero visual */
+    .hero-visual {
+      position: relative;
+      background: var(--surface-container-low);
+      overflow: hidden;
+    }
+    .hero-visual-inner {
+      position: absolute;
+      inset: var(--space-10);
+      background: var(--surface-container);
+    }
+    .hero-visual-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      mix-blend-mode: multiply;
+    }
+    /* Crop marks on hero visual */
+    .hero-visual::before, .hero-visual::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      z-index: 10;
+    }
+    .hero-visual::before { top: 32px; left: 32px; border-top: 1px solid var(--outline); border-left: 1px solid var(--outline); }
+    .hero-visual::after  { top: 32px; right: 32px; border-top: 1px solid var(--outline); border-right: 1px solid var(--outline); }
+    .hero-visual-bl, .hero-visual-br {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      z-index: 10;
+    }
+    .hero-visual-bl { bottom: 32px; left: 32px; border-bottom: 1px solid var(--outline); border-left: 1px solid var(--outline); }
+    .hero-visual-br { bottom: 32px; right: 32px; border-bottom: 1px solid var(--outline); border-right: 1px solid var(--outline); }
 
-  /* FOOTER */
-  footer { background: var(--charcoal); border-top: 1px solid var(--border); padding: 3rem; display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap; }
-  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--white); letter-spacing: 0.08em; }
-  .footer-logo span { color: var(--red); }
-  .footer-by { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 0.25rem; }
-  .footer-by a { color: var(--muted); text-decoration: underline; }
-  .footer-links { display: flex; gap: 2rem; list-style: none; }
-  .footer-links a { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--white); }
+    /* Serial tag */
+    .hero-serial {
+      position: absolute;
+      top: 40px;
+      right: 48px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--outline);
+    }
 
-  /* ANIMATIONS */
-  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
+    /* ════════════════════════════════════════════════════════
+       VULNERABILITY SECTION
+    ════════════════════════════════════════════════════════ */
+    .vulnerability {
+      padding: var(--space-16) 0;
+      border-top: 1px solid var(--card-border);
+    }
+    .vulnerability-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--margin-desktop);
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: var(--space-10);
+      align-items: start;
+    }
+    .vulnerability-label {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      padding-top: 2px;
+    }
+    .vulnerability-label .report-id {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--outline);
+      text-transform: uppercase;
+    }
+    .vulnerability-title {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+    .vulnerability-body {
+      font-size: 15px;
+      color: var(--on-surface-variant);
+      line-height: 1.7;
+      margin-bottom: var(--space-6);
+      max-width: 560px;
+    }
+    .stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--card-border);
+      border: 1px solid var(--card-border);
+      margin-top: var(--space-2);
+    }
+    .stat-block {
+      background: var(--white);
+      padding: var(--space-4) var(--space-4);
+    }
+    .stat-value {
+      font-size: clamp(36px, 5vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+    }
 
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    .hero { grid-template-columns: 1fr; }
-    .hero-right { min-height: 50vw; }
-    .hero-img-grid { position: relative; height: 50vw; }
-    .problem-inner, .specs-inner, .testing-header, .product-header { grid-template-columns: 1fr; gap: 2.5rem; }
-    .features-grid, .market-tabs { grid-template-columns: 1fr; }
-    .hotspot-grid, .threats-grid, .downloads-grid { grid-template-columns: 1fr; }
-    .gallery-grid { grid-template-columns: 1fr 1fr; }
-    .gallery-item.large { grid-row: span 1; }
-    section { padding: 5rem 1.5rem; }
-    footer { flex-direction: column; align-items: flex-start; }
-  }
-</style>
+    /* ════════════════════════════════════════════════════════
+       ARCHITECTURE SECTION
+    ════════════════════════════════════════════════════════ */
+    .architecture {
+      padding: var(--space-16) 0;
+      background: var(--surface-container-low);
+      border-top: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--card-border);
+    }
+    .architecture-header {
+      text-align: center;
+      margin-bottom: var(--space-10);
+    }
+    .architecture-header .sys-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: var(--space-2);
+    }
+    .architecture-header h2 {
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: var(--primary);
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--card-border);
+      border: 1px solid var(--card-border);
+    }
+    .arch-card {
+      background: var(--white);
+      padding: var(--space-5);
+      position: relative;
+      transition: background 0.2s;
+    }
+    .arch-card:hover { background: var(--surface-container-low); }
+    .arch-card-serial {
+      position: absolute;
+      top: var(--space-2);
+      right: var(--space-3);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: var(--outline);
+      text-transform: uppercase;
+    }
+    .arch-card-icon {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-3);
+      color: var(--copper);
+    }
+    .arch-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+    }
+    .arch-card p {
+      font-size: 13px;
+      color: var(--on-surface-variant);
+      line-height: 1.65;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       SPECS SECTION (DARK)
+    ════════════════════════════════════════════════════════ */
+    .specs {
+      background: var(--inverse-surface);
+      color: var(--inverse-on-surface);
+      padding: var(--space-10) 0;
+    }
+    .specs-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--margin-desktop);
+    }
+    .specs-label {
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--outline);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-6);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .specs-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .spec-item {
+      padding: var(--space-3) var(--space-4);
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+    .spec-item:last-child { border-right: none; }
+    .spec-key {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 8px;
+    }
+    .spec-val {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: var(--inverse-on-surface);
+    }
+
+    /* ════════════════════════════════════════════════════════
+       CTA SECTION
+    ════════════════════════════════════════════════════════ */
+    .cta-section {
+      padding: var(--space-16) 0;
+      background: var(--surface-container-low);
+      overflow: hidden;
+      position: relative;
+    }
+    .cta-watermark {
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: clamp(80px, 16vw, 200px);
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      color: rgba(0,0,0,0.04);
+      white-space: nowrap;
+      user-select: none;
+      pointer-events: none;
+      line-height: 1;
+    }
+    .cta-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0 var(--margin-desktop);
+      position: relative;
+      z-index: 2;
+    }
+    .cta-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--copper);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-5);
+      color: white;
+    }
+    .cta-headline {
+      font-size: clamp(32px, 4.5vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-bottom: var(--space-3);
+    }
+    .cta-sub {
+      font-size: 14px;
+      color: var(--on-surface-variant);
+      line-height: 1.65;
+      margin-bottom: var(--space-6);
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .email-form {
+      display: flex;
+      gap: 0;
+      max-width: 440px;
+      margin: 0 auto;
+      border: 1px solid var(--card-border);
+    }
+    .email-input {
+      flex: 1;
+      background: var(--white);
+      border: none;
+      outline: none;
+      padding: 14px 18px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+    .email-input::placeholder {
+      color: var(--outline);
+    }
+    .email-submit {
+      background: var(--primary);
+      color: var(--on-primary);
+      border: none;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .email-submit:hover { background: #333; }
+
+    /* ════════════════════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════════════════════ */
+    .footer {
+      background: var(--white);
+      border-top: 1px solid var(--card-border);
+      padding: var(--space-6) 0;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--margin-desktop);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+    }
+    .footer-logo {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--primary); }
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--outline);
+    }
+
+    /* ════════════════════════════════════════════════════════
+       SCROLL ANIMATIONS
+    ════════════════════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ════════════════════════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════════════════════════ */
+    @media (max-width: 960px) {
+      :root {
+        --margin-desktop: 40px;
+      }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-content { padding: var(--space-12) var(--margin-desktop); padding-top: calc(56px + var(--space-8)); }
+      .hero-visual { height: 60vw; min-height: 320px; }
+      .vulnerability-inner { grid-template-columns: 1fr; gap: var(--space-6); }
+      .cards-grid { grid-template-columns: 1fr; }
+      .specs-row { grid-template-columns: repeat(2, 1fr); }
+      .spec-item:nth-child(2) { border-right: none; }
+      .spec-item:nth-child(3), .spec-item:nth-child(4) { border-top: 1px solid rgba(255,255,255,0.08); }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 640px) {
+      :root {
+        --margin-desktop: 20px;
+      }
+      .hero-headline { font-size: 40px; }
+      .stats-row { grid-template-columns: 1fr; }
+      .stat-block:first-child { border-bottom: 1px solid var(--card-border); }
+      .specs-row { grid-template-columns: 1fr 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
 </head>
-<body>
+<body class="dot-grid">
 
-<!-- NAV -->
-<nav>
-  <a class="nav-logo" href="#"><span>Volt</span>Armor</a>
-  <ul class="nav-links">
-    <li><a href="#problem">The Problem</a></li>
-    <li><a href="#product">Product</a></li>
-    <li><a href="#testing">Testing</a></li>
-    <li><a href="#markets">Markets</a></li>
-    <li><a href="#downloads">Downloads</a></li>
-  </ul>
-  <a class="nav-cta" href="#contact">Request Sample</a>
-</nav>
+  <!-- ══════════════ NAV ══════════════ -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">SECURE_SHIELD <span>// EV-01</span></a>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#technology">Technology</a></li>
+        <li><a href="#specs">Specs</a></li>
+        <li><a href="#preorder">Pre-order</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="#preorder" class="btn-primary" style="font-size:10px; padding:10px 18px;">
+          GET SECURED
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#" class="nav-cart" aria-label="Cart">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M1 1h2.5l1.6 8h9l1.4-5.5H5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7.5" cy="14.5" r="1" fill="currentColor"/><circle cx="13.5" cy="14.5" r="1" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </div>
+  </nav>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-left">
-    <div class="hero-eyebrow">Reinforced Cable Protection System</div>
-    <h1>Keep the<br>flow <span class="outline">secure.</span></h1>
-    <p class="hero-sub">VoltArmor is a field-installable protective sleeve system for EV charging cables — combining UHMWPE fabric and integrated steel wire ropes to resist cutting attempts and deter theft.</p>
-    <div class="hero-actions">
-      <a class="btn-primary" href="#product">Explore the System</a>
-      <a class="btn-ghost" href="#testing">▶ View Test Results</a>
-    </div>
-    <div class="hero-stats">
-      <div>
-        <div class="stat-num">8<span>×</span></div>
-        <div class="stat-label">Steel wire ropes</div>
+  <!-- ══════════════ HERO ══════════════ -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="hero-status reveal">
+        <span class="status-indicator">
+          <span class="status-dot"></span>
+          Status: Pre-Order Active
+        </span>
       </div>
-      <div>
-        <div class="stat-num">5<span>m</span></div>
-        <div class="stat-label">Cable length</div>
-      </div>
-    </div>
-  </div>
-  <div class="hero-right">
-    <div class="hero-img-grid">
-      <img src="img_product_3.jpeg" alt="VoltArmor sleeve — outer protective flap detail">
-      <img src="img_product_4.jpeg" alt="VoltArmor sleeve — inner layer cross-section">
-      <img src="img_product_1.jpeg" alt="VoltArmor sleeve — zipper closure detail">
-      <img src="img_product_2.jpeg" alt="VoltArmor — dual zipper system">
-    </div>
-    <div class="hero-badge">
-      <div class="hero-badge-label">Tested for</div>
-      <div class="hero-badge-text">Enel S.p.A — Feb 2026</div>
-    </div>
-  </div>
-</section>
 
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-inner">
-    <span>Cut-Resistant Protection</span><span>8 Integrated Steel Wires</span><span>UHMWPE Fabric</span><span>Field Installable</span><span>Tested for Enel S.p.A</span><span>Dual-Layer System</span><span>37.5mm Cable Diameter</span><span>Zipper Application</span><span>Cut-Resistant Protection</span><span>8 Integrated Steel Wires</span><span>UHMWPE Fabric</span><span>Field Installable</span><span>Tested for Enel S.p.A</span><span>Dual-Layer System</span><span>37.5mm Cable Diameter</span><span>Zipper Application</span>
-  </div>
-</div>
+      <h1 class="hero-headline reveal reveal-delay-1">
+        SECURE THE<br /><em>CHARGE</em>
+      </h1>
 
-<!-- PRODUCT GALLERY -->
-<section class="gallery-section" id="gallery">
-  <div class="gallery-inner">
-    <div class="section-label">Product</div>
-    <h2 class="section-title">Built for the field</h2>
-    <div class="gallery-grid">
-      <div class="gallery-item large">
-        <img src="img_product_3.jpeg" alt="VoltArmor outer sleeve with Reinforced Cable label" style="min-height:480px;">
-      </div>
-      <div class="gallery-item">
-        <img src="img_product_2.jpeg" alt="VoltArmor dual zipper system">
-      </div>
-      <div class="gallery-item">
-        <img src="img_product_4.jpeg" alt="VoltArmor inner layer view">
-      </div>
-      <div class="gallery-item">
-        <img src="img_product_1.jpeg" alt="VoltArmor zipper closure detail">
-      </div>
-      <div class="gallery-item" style="background:var(--panel);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;padding:2rem;text-align:center;">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--red);line-height:1;">8</div>
-        <div style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);">Steel wire ropes<br>per sleeve</div>
-      </div>
-    </div>
-  </div>
-</section>
+      <p class="hero-body reveal reveal-delay-2">
+        Precision-engineered armor for the EV infrastructure. Defend against cable theft with industrial-grade resilience.
+      </p>
 
-<!-- PROBLEM -->
-<section class="problem" id="problem">
-  <div class="problem-inner">
-    <div>
-      <div class="section-label">The Problem</div>
-      <h2 class="section-title">A €3,500 problem<br>sold for €40<br>of copper</h2>
-      <p class="problem-body">EV charging cable theft has exploded globally, driven by rising copper prices and a critical <strong>risk-reward imbalance</strong>. A thief can sever a standard charging cable in seconds with a bolt cutter — extracting ~<strong>€40 in scrap copper</strong> while leaving operators with <strong>€3,500 in damage, downtime, and replacement costs</strong>.<br><br>Insurance companies now classify these incidents as <strong>high-risk recurring losses</strong>. With over 15 million public EV charge points globally and the number accelerating, operators urgently need a retrofit-ready solution.</p>
-      <div class="cost-callout">
-        <div class="cost-num">€3,500</div>
-        <div class="cost-label">Average cost per theft incident — cable + downtime + labor</div>
-      </div>
-    </div>
-    <div>
-      <div class="section-label">Global Hotspots</div>
-      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--white);letter-spacing:0.04em;margin-bottom:0.5rem;">Where it's happening</h3>
-      <p style="font-size:0.85rem;color:var(--muted);line-height:1.65;margin-bottom:1.5rem;">Theft clusters wherever fast-charging infrastructure meets low overnight surveillance.</p>
-      <div class="hotspot-grid">
-        <div class="hotspot"><div class="hotspot-country">Germany</div><div class="hotspot-detail">EnBW reported 900+ incidents across 130+ sites. Up to 70 stations taken offline in a single day.</div></div>
-        <div class="hotspot"><div class="hotspot-country">UK</div><div class="hotspot-detail">Vandalism up 100%+ in two years. Cambridgeshire, South Yorkshire, and Nottinghamshire lead.</div></div>
-        <div class="hotspot"><div class="hotspot-country">USA</div><div class="hotspot-detail">Cable theft up 300% in three years. NEVI-funded infrastructure expansion accelerating exposure.</div></div>
-        <div class="hotspot"><div class="hotspot-country">India</div><div class="hotspot-detail">Organized overnight operations in Chandigarh, Hyderabad, and Delhi causing millions in rupee losses.</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PRODUCT -->
-<section id="product" style="padding:8rem 3rem;">
-  <div class="product">
-    <div class="product-header">
-      <div>
-        <div class="section-label">The Solution</div>
-        <h2 class="section-title">VoltArmor<br>Protection<br>System</h2>
-      </div>
-      <div>
-        <p class="product-intro">Designed and developed by Kavi Design & Engineering Studio, VoltArmor is a multi-layer textile sleeve that wraps around standard EV charging cables — adding meaningful cut resistance without requiring cable replacement or specialized tools to install.</p>
-        <p class="product-intro" style="margin-top:1rem;">The system combines a UHMWPE outer layer with eight longitudinally-spaced 3 mm steel wire ropes, enclosed in a dual-zipper sleeve with stainless steel end clamps and locking connector covers.</p>
-      </div>
-    </div>
-    <div class="features-grid">
-      <div class="feature"><div class="feature-tag">Core Layer</div><span class="feature-icon">🧱</span><div class="feature-name">UHMWPE Fabric</div><div class="feature-desc">Ultra-High Molecular Weight Polyethylene outer sleeve provides exceptional cut resistance against hand tools. Flexible, lightweight, and weather-resistant.</div></div>
-      <div class="feature"><div class="feature-tag">Durability</div><span class="feature-icon">🔩</span><div class="feature-name">Steel Wire Ropes</div><div class="feature-desc">Eight integrated steel wire ropes distributed around the circumference force attackers to cut through metal before reaching the cable — maximizing time-to-breach.</div></div>
-      <div class="feature"><div class="feature-tag">Dual Layer</div><span class="feature-icon">🧅</span><div class="feature-name">Inner + Outer Sleeve</div><div class="feature-desc">A layered construction with inner wrap and reinforced outer sleeve creates redundancy — no single cut compromises the full system.</div></div>
-      <div class="feature"><div class="feature-tag">No Downtime</div><span class="feature-icon">⚡</span><div class="feature-name">Field Installable</div><div class="feature-desc">Zipper-based application installs on existing cables without removal or station downtime. No special tools needed beyond a standard socket for end clamps.</div></div>
-      <div class="feature"><div class="feature-tag">End Caps</div><span class="feature-icon">🔒</span><div class="feature-name">Stainless End Securing</div><div class="feature-desc">Stainless steel clamps and locking protective covers secure both cable ends, preventing sleeve removal and protecting the connector junction.</div></div>
-      <div class="feature"><div class="feature-tag">Standard</div><span class="feature-icon">📐</span><div class="feature-name">37.5mm / 5m Ready</div><div class="feature-desc">Designed for the most common EV fast-charging cable diameter and standard 5 m lengths. Custom sizing available for OEM integration.</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- SPECS + INSTALLATION -->
-<section class="specs-section">
-  <div class="specs-inner">
-    <div>
-      <div class="section-label">Specifications</div>
-      <h2 class="section-title">Technical<br>Details</h2>
-      <div class="specs-table">
-        <div class="spec-row"><div class="spec-key">Cable diameter</div><div class="spec-val">37.5 mm</div></div>
-        <div class="spec-row"><div class="spec-key">Cable length</div><div class="spec-val">5 m (standard)</div></div>
-        <div class="spec-row"><div class="spec-key">Outer material</div><div class="spec-val">UHMWPE-based fabric</div></div>
-        <div class="spec-row"><div class="spec-key">Steel wires</div><div class="spec-val">8 × 3 mm diameter</div></div>
-        <div class="spec-row"><div class="spec-key">Clamps</div><div class="spec-val">Stainless steel (socket-tightened)</div></div>
-        <div class="spec-row"><div class="spec-key">Fastening</div><div class="spec-val">Dual zipper + Velcro outer flap</div></div>
-        <div class="spec-row"><div class="spec-key">Installation</div><div class="spec-val">Field retrofit — no cable removal</div></div>
-        <div class="spec-row"><div class="spec-key">End protection</div><div class="spec-val">Locking connector covers</div></div>
-      </div>
-    </div>
-    <div>
-      <div class="section-label">Installation</div>
-      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--white);letter-spacing:0.04em;">5 Steps. No Downtime.</h3>
-      <div class="install-steps">
-        <div class="install-step"><div class="step-num">01</div><div><div class="step-title">Wrap inner sleeve around cable</div><div class="step-desc">Open the inner sleeve and wrap it around the EV charging cable along its full length.</div></div></div>
-        <div class="install-step"><div class="step-num">02</div><div><div class="step-title">Guide zipper around connector</div><div class="step-desc">Route the zipper around the EV connector end and pull along the cable to close the inner sleeve.</div></div></div>
-        <div class="install-step"><div class="step-num">03</div><div><div class="step-title">Apply and close outer sleeve</div><div class="step-desc">Slide on the outer protective sleeve, close the outer zipper, and fold down the protective flap.</div></div></div>
-        <div class="install-step"><div class="step-num">04</div><div><div class="step-title">Clamp and tighten ends</div><div class="step-desc">Position stainless steel clamps at both cable ends and tighten securely with a standard socket.</div></div></div>
-        <div class="install-step"><div class="step-num">05</div><div><div class="step-title">Lock connector covers</div><div class="step-desc">Attach the protective cover at both ends until it locks. Repeat for the opposite end.</div></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTING -->
-<section id="testing" style="padding:8rem 3rem;">
-  <div class="testing-section">
-    <div class="testing-header">
-      <div>
-        <div class="section-label">Durability Report — Feb 2026</div>
-        <h2 class="section-title">Tested.<br>Proven.<br>Deployable.</h2>
-        <div class="enel-badge"><div class="enel-dot"></div><div class="enel-text">Cut-resistance test conducted for <strong>Enel S.p.A.</strong></div></div>
-      </div>
-      <div>
-        <p style="font-size:0.95rem;color:var(--muted);line-height:1.8;margin-bottom:1.5rem;">Formal durability testing was conducted on a 37.5 mm cable surrogate against the two highest-risk attack tools: cable cutters and an angle grinder with a steel cutting disc.</p>
-        <p style="font-size:0.95rem;color:var(--muted);line-height:1.8;"><strong style="color:var(--white)">Configuration A — eight 3 mm steel wires — was selected</strong> as the optimal balance of protection, weight, flexibility, and installation practicality. Three configurations were prototyped and evaluated.</p>
-        <div class="threats-grid">
-          <div class="threat-card primary"><div class="threat-label">Primary Threat</div><div class="threat-name">Cable Cutter</div><div class="threat-desc">Most common theft tool. VoltArmor showed limited progression — steel wires defeated bolt cutter leverage.</div></div>
-          <div class="threat-card primary"><div class="threat-label">Primary Threat</div><div class="threat-name">Angle Grinder</div><div class="threat-desc">Highest-risk tool. VoltArmor significantly increased time-to-breach vs. unprotected baseline.</div></div>
-          <div class="threat-card secondary"><div class="threat-label">Secondary Threat</div><div class="threat-name">Hand Saw</div><div class="threat-desc">Requires sustained access and stable fixturing. Reinforcement adds substantial delay.</div></div>
-          <div class="threat-card secondary"><div class="threat-label">Secondary Threat</div><div class="threat-name">Electrician's Scissors</div><div class="threat-desc">Designed for soft insulation. Showed minimal progression against reinforced assembly.</div></div>
+      <div class="hero-cta reveal reveal-delay-3">
+        <a href="#preorder" class="btn-primary">
+          PRE-ORDER NOW
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="hero-price">
+          <span class="hero-price-was">$299</span>
+          <span class="hero-price-now">$249</span>
         </div>
       </div>
     </div>
-    <div class="result-bar-section">
-      <div class="result-title">Tool Penetration Resistance</div>
-      <div class="result-subtitle">Relative time-to-breach comparison (higher bar = greater VoltArmor resistance)</div>
-      <div class="bar-item"><div class="bar-label-row"><span class="bar-name">Electrician's Scissors</span><span class="bar-val">Minimal progression</span></div><div class="bar-track"><div class="bar-fill scissors" data-width="8"></div></div></div>
-      <div class="bar-item"><div class="bar-label-row"><span class="bar-name">Cable Cutter</span><span class="bar-val">Limited progression</span></div><div class="bar-track"><div class="bar-fill cable-cutter" data-width="18"></div></div></div>
-      <div class="bar-item"><div class="bar-label-row"><span class="bar-name">Hand Saw</span><span class="bar-val">Significant delay added</span></div><div class="bar-track"><div class="bar-fill hand-saw" data-width="62"></div></div></div>
-      <div class="bar-item"><div class="bar-label-row"><span class="bar-name">Angle Grinder</span><span class="bar-val">Meaningfully increased vs. unprotected</span></div><div class="bar-track"><div class="bar-fill grinder" data-width="92"></div></div></div>
-    </div>
-  </div>
-</section>
 
-<!-- MARKETS -->
-<section class="markets-section" id="markets">
-  <div class="markets-inner">
-    <div class="markets-header">
-      <div class="section-label">Target Markets</div>
-      <h2 class="section-title" style="max-width:500px;">Who needs<br>VoltArmor</h2>
-      <p class="markets-intro">The strongest B2B case is operators who've already experienced theft — a single cable replacement costs 2–4× the price of protecting it.</p>
-    </div>
-    <div class="market-tabs">
-      <div class="market-name">Charging Network Operators</div><div class="market-desc">One procurement decision reaches thousands of locations. The clearest ROI: a single theft event recovers the product cost many times over.</div>
-      <div class="market-name">Municipalities & NEVI Recipients</div><div class="market-desc">NEVI program covers 80% of installation costs. Recipients need to protect that federal infrastructure investment — the exact VoltArmor pitch.</div>
-      <div class="market-name">Insurance & Institutional</div><div class="market-desc">Insurers classifying cable theft as high-risk recurring damage can mandate or incentivize VoltArmor — turning the product into a near-requirement for coverage.</div>
-    </div>
-  </div>
-</section>
+    <div class="hero-visual">
+      <!-- Crop marks -->
+      <div class="hero-visual-bl"></div>
+      <div class="hero-visual-br"></div>
+      <span class="hero-serial">SN // EV-01-0042</span>
 
-<!-- DOWNLOADS -->
-<section class="downloads-section" id="downloads">
-  <div class="downloads-inner">
-    <div class="section-label">Resources</div>
-    <h2 class="section-title">Documentation</h2>
-    <p style="font-size:0.95rem;color:var(--muted);margin-top:1rem;max-width:480px;line-height:1.7;">Download the official product brochure or the full cut-resistance durability test report conducted for Enel S.p.A.</p>
-    <div class="downloads-grid">
-      <a class="download-card" href="VoltArmor_Brochure.pdf" download>
-        <div class="dl-icon">📄</div>
-        <div><div class="dl-title">Product Brochure</div><div class="dl-sub">EN / IT — Installation guide, key features, specifications</div></div>
-        <div class="dl-arrow">↓</div>
-      </a>
-      <a class="download-card" href="VoltArmor_Durability_Report.pdf" download>
-        <div class="dl-icon">🔬</div>
-        <div><div class="dl-title">Durability Test Report</div><div class="dl-sub">Feb 2026 — Cut-resistance testing for Enel S.p.A.</div></div>
-        <div class="dl-arrow">↓</div>
-      </a>
+      <div class="hero-visual-inner">
+        <!-- EV cable visual — SVG placeholder matching the orange cable image -->
+        <svg viewBox="0 0 600 540" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+          <defs>
+            <radialGradient id="bg-grad" cx="50%" cy="50%" r="60%">
+              <stop offset="0%" stop-color="#e8e8e8"/>
+              <stop offset="100%" stop-color="#d0d0d0"/>
+            </radialGradient>
+            <!-- Orange rope texture -->
+            <linearGradient id="cable-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%"   stop-color="#e8854a"/>
+              <stop offset="40%"  stop-color="#c9551a"/>
+              <stop offset="70%"  stop-color="#de6930"/>
+              <stop offset="100%" stop-color="#a83d0e"/>
+            </linearGradient>
+            <linearGradient id="cable-grad2" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%"  stop-color="#d06028"/>
+              <stop offset="50%" stop-color="#e87c3a"/>
+              <stop offset="100%" stop-color="#b84a15"/>
+            </linearGradient>
+            <linearGradient id="connector-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%"  stop-color="#c8c8c8"/>
+              <stop offset="40%" stop-color="#a0a0a0"/>
+              <stop offset="100%" stop-color="#787878"/>
+            </linearGradient>
+            <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+              <feDropShadow dx="4" dy="8" stdDeviation="12" flood-color="rgba(0,0,0,0.25)"/>
+            </filter>
+          </defs>
+
+          <rect width="600" height="540" fill="url(#bg-grad)"/>
+
+          <!-- Cable 1 (thick, top-right to bottom-left arc) -->
+          <path d="M 440,30 C 420,80 380,120 340,180 C 300,240 270,300 220,380 C 190,430 160,480 120,520"
+                fill="none" stroke="url(#cable-grad)" stroke-width="38" stroke-linecap="round" filter="url(#shadow)"/>
+          <!-- Cable highlight -->
+          <path d="M 435,28 C 415,78 375,118 335,178 C 295,238 265,298 215,378"
+                fill="none" stroke="rgba(255,200,160,0.25)" stroke-width="10" stroke-linecap="round"/>
+
+          <!-- Cable 2 (slightly offset) -->
+          <path d="M 480,60 C 450,110 420,160 390,220 C 360,280 320,340 280,400 C 250,450 210,500 170,540"
+                fill="none" stroke="url(#cable-grad2)" stroke-width="34" stroke-linecap="round" filter="url(#shadow)"/>
+          <path d="M 476,59 C 446,109 416,159 386,219 C 356,279 316,339 276,399"
+                fill="none" stroke="rgba(255,210,170,0.2)" stroke-width="8" stroke-linecap="round"/>
+
+          <!-- Connector body (center, metallic cylinder) -->
+          <g transform="translate(310, 230) rotate(-30)" filter="url(#shadow)">
+            <!-- Main cylinder -->
+            <rect x="-22" y="-54" width="44" height="108" rx="6" fill="url(#connector-grad)"/>
+            <!-- Knurled texture rings -->
+            <rect x="-22" y="-40" width="44" height="3" fill="rgba(0,0,0,0.15)" rx="1"/>
+            <rect x="-22" y="-28" width="44" height="3" fill="rgba(0,0,0,0.15)" rx="1"/>
+            <rect x="-22" y="-16" width="44" height="3" fill="rgba(0,0,0,0.15)" rx="1"/>
+            <rect x="-22" y="-4"  width="44" height="3" fill="rgba(0,0,0,0.15)" rx="1"/>
+            <rect x="-22" y="8"   width="44" height="3" fill="rgba(0,0,0,0.15)" rx="1"/>
+            <rect x="-22" y="20"  width="44" height="3" fill="rgba(0,0,0,0.15)" rx="1"/>
+            <rect x="-22" y="32"  width="44" height="3" fill="rgba(0,0,0,0.15)" rx="1"/>
+            <!-- Highlight -->
+            <rect x="-18" y="-54" width="8" height="108" rx="4" fill="rgba(255,255,255,0.18)"/>
+            <!-- End cap -->
+            <ellipse cx="0" cy="-54" rx="22" ry="8" fill="#b0b0b0"/>
+            <ellipse cx="0" cy="54"  rx="22" ry="8" fill="#888"/>
+            <!-- Pin end -->
+            <ellipse cx="0" cy="-54" rx="10" ry="4" fill="#707070"/>
+            <ellipse cx="0" cy="54"  rx="10" ry="4" fill="#505050"/>
+          </g>
+
+          <!-- Small connector pin detail -->
+          <g transform="translate(340,270) rotate(-30)">
+            <rect x="-5" y="-14" width="10" height="28" rx="3" fill="#606060"/>
+            <rect x="-3" y="-8"  width="6"  height="4"  rx="1" fill="#404040"/>
+          </g>
+
+          <!-- Grid overlay subtle -->
+          <rect width="600" height="540" fill="none" stroke="rgba(0,0,0,0.02)" stroke-width="0.5"/>
+        </svg>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CTA -->
-<section class="cta-section" id="contact">
-  <div class="cta-inner">
-    <div class="section-label" style="justify-content:center;margin-bottom:1.5rem;">Get in Touch</div>
-    <h2 class="cta-title">Ready to protect<br>your <span class="red">infrastructure?</span></h2>
-    <p class="cta-body">Request a sample kit, technical data sheet, or a copy of the durability test report. We work directly with operators, procurement teams, and OEM partners.</p>
-    <div class="cta-actions">
-      <a class="btn-primary" href="mailto:info@designkavi.com?subject=VoltArmor%20Sample%20Request">Request a Sample</a>
-      <a class="btn-primary" href="VoltArmor_Durability_Report.pdf" download style="background:var(--panel);border:1px solid var(--border);">Download Test Report</a>
+  <!-- ══════════════ VULNERABILITY ══════════════ -->
+  <section class="vulnerability" id="technology">
+    <div class="vulnerability-inner">
+      <div class="vulnerability-label reveal">
+        <span class="report-id">FIELD_REPORT // 001</span>
+        <h2 class="vulnerability-title">THE<br />VULNERABILITY</h2>
+      </div>
+
+      <div>
+        <p class="vulnerability-body reveal reveal-delay-1">
+          Public charging infrastructure is under attack. The high value of raw copper has made unguarded EV cables a prime target for rapid, destructive theft, causing massive downtime and replacement costs.
+        </p>
+        <div class="stats-row reveal reveal-delay-2">
+          <div class="stat-block">
+            <div class="stat-value">300%</div>
+            <div class="stat-label">Increase in cable theft YoY</div>
+          </div>
+          <div class="stat-block" style="border-left: 1px solid var(--card-border);">
+            <div class="stat-value">$2.5B</div>
+            <div class="stat-label">Est. annual infrastructure loss</div>
+          </div>
+        </div>
+      </div>
     </div>
-    <p style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:2.5rem;">Designed & developed by <a href="https://designkavi.com" style="color:var(--muted);text-decoration:underline;">Kavi Design & Engineering Studio</a></p>
-  </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<footer>
-  <div>
-    <div class="footer-logo"><span>Volt</span>Armor</div>
-    <div class="footer-by">by <a href="https://designkavi.com">Kavi Design & Engineering Studio</a></div>
-  </div>
-  <ul class="footer-links">
-    <li><a href="#problem">Problem</a></li>
-    <li><a href="#product">Product</a></li>
-    <li><a href="#testing">Testing</a></li>
-    <li><a href="#markets">Markets</a></li>
-    <li><a href="#downloads">Downloads</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</footer>
+  <!-- ══════════════ ARCHITECTURE ══════════════ -->
+  <section class="architecture" id="specs-overview">
+    <div class="section-inner">
+      <div class="architecture-header reveal">
+        <div class="sys-label">SYS_OVERVIEW</div>
+        <h2>EV-01 ARCHITECTURE</h2>
+      </div>
 
-<script>
-  // Animated bars on scroll
-  const barObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.querySelectorAll('.bar-fill').forEach(bar => {
-          bar.style.width = bar.dataset.width + '%';
-        });
-        barObserver.unobserve(e.target);
+      <div class="cards-grid">
+        <!-- Card 1 -->
+        <article class="arch-card reveal reveal-delay-1">
+          <span class="arch-card-serial">L_01</span>
+          <div class="arch-card-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect x="2" y="2" width="7" height="7" stroke="currentColor" stroke-width="1.3"/>
+              <rect x="11" y="2" width="7" height="7" stroke="currentColor" stroke-width="1.3"/>
+              <rect x="2" y="11" width="7" height="7" stroke="currentColor" stroke-width="1.3"/>
+              <rect x="11" y="11" width="7" height="7" stroke="currentColor" stroke-width="1.3"/>
+            </svg>
+          </div>
+          <h3>Cut-Resistant Mesh</h3>
+          <p>High-tensile woven steel alloy core designed to blind and dull industrial cutting tools on contact.</p>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="arch-card reveal reveal-delay-2">
+          <span class="arch-card-serial">L_02</span>
+          <div class="arch-card-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.3"/>
+              <circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="1.3"/>
+              <line x1="10" y1="3" x2="10" y2="1" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+              <line x1="10" y1="19" x2="10" y2="17" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+              <line x1="3" y1="10" x2="1" y2="10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+              <line x1="19" y1="10" x2="17" y2="10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Polymer Casing</h3>
+          <p>Weather-sealed, UV-resistant industrial polymer shell that maintains flexibility in sub-zero temperatures.</p>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="arch-card reveal reveal-delay-3">
+          <span class="arch-card-serial">L_03</span>
+          <div class="arch-card-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M10 2C6 2 4 5 4 8c0 4 3 6 6 10 3-4 6-6 6-10 0-3-2-6-6-6z" stroke="currentColor" stroke-width="1.3"/>
+              <circle cx="10" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/>
+            </svg>
+          </div>
+          <h3>Integrated Sensor</h3>
+          <p>Embedded continuity wire triggers a silent alarm to the station operator if the sleeve is breached.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ SPECS (DARK) ══════════════ -->
+  <section class="specs" id="specs">
+    <div class="specs-inner">
+      <div class="specs-label reveal">Technical Specifications</div>
+      <div class="specs-row">
+        <div class="spec-item reveal reveal-delay-1">
+          <div class="spec-key">Weight</div>
+          <div class="spec-val">2.4 kg/m</div>
+        </div>
+        <div class="spec-item reveal reveal-delay-2">
+          <div class="spec-key">Material</div>
+          <div class="spec-val">Steel Alloy + TPE</div>
+        </div>
+        <div class="spec-item reveal reveal-delay-3">
+          <div class="spec-key">Compatibility</div>
+          <div class="spec-val">CCS1, CCS2, NACS</div>
+        </div>
+        <div class="spec-item reveal reveal-delay-4">
+          <div class="spec-key">Certification</div>
+          <div class="spec-val">IP68, IK10</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ CTA ══════════════ -->
+  <section class="cta-section" id="preorder">
+    <div class="cta-watermark" aria-hidden="true">DEFEND</div>
+    <div class="cta-inner">
+      <div class="cta-icon reveal">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <path d="M11 2L3 5.5v6c0 4.5 3.5 8 8 9 4.5-1 8-4.5 8-9v-6L11 2z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2 class="cta-headline reveal reveal-delay-1">JOIN THE DEFENSE</h2>
+      <p class="cta-sub reveal reveal-delay-2">
+        Secure your infrastructure. Sign up for early access and priority deployment of the EV-01 system.
+      </p>
+      <div class="email-form reveal reveal-delay-3">
+        <input class="email-input" type="email" placeholder="ENTER COMM LINK (EMAIL)" aria-label="Email address" />
+        <button class="email-submit" type="button" aria-label="Submit">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ FOOTER ══════════════ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-logo">SECURE_SHIELD</span>
+      <ul class="footer-links">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Technical Support</a></li>
+        <li><a href="#">Global Distribution</a></li>
+      </ul>
+      <span class="footer-copy">© 2024 Industrial Defense Systems. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <!-- ══════════════ SCROLL REVEAL JS ══════════════ -->
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => io.observe(el));
+
+    // Trigger hero reveals on load
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.hero .reveal').forEach(el => {
+        setTimeout(() => el.classList.add('visible'), 100);
+      });
+    });
+
+    // Email form
+    const form = document.querySelector('.email-form');
+    const input = document.querySelector('.email-input');
+    const submitBtn = document.querySelector('.email-submit');
+    submitBtn.addEventListener('click', () => {
+      if (input.value && input.value.includes('@')) {
+        input.value = '';
+        input.placeholder = 'DEPLOYMENT REQUEST LOGGED ✓';
+        submitBtn.style.background = '#de593e';
+        setTimeout(() => {
+          input.placeholder = 'ENTER COMM LINK (EMAIL)';
+          submitBtn.style.background = '';
+        }, 3000);
       }
     });
-  }, { threshold: 0.3 });
-  const barSection = document.querySelector('.result-bar-section');
-  if (barSection) barObserver.observe(barSection);
-
-  // Fade-up on scroll
-  const fadeItems = document.querySelectorAll('.feature, .hotspot, .market-tab, .threat-card, .install-step, .spec-row, .download-card, .gallery-item');
-  fadeItems.forEach((el, i) => {
-    el.classList.add('fade-up');
-    el.style.transitionDelay = (i % 4) * 80 + 'ms';
-  });
-  const fadeObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObserver.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
-</script>
+  </script>
 </body>
 </html>
