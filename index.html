@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    /* ─── DESIGN TOKENS ─────────────────────────────────── */
     :root {
       --surface:                  #f9f9f9;
       --surface-dim:              #dadada;
@@ -71,32 +70,16 @@
       background-size: 8px 8px;
     }
 
-    .label-mono {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--on-surface-variant);
-    }
-
     /* ─── STATUS INDICATOR ─── */
     .status-indicator {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--font-mono); font-size: 10px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
       color: var(--on-surface-variant);
     }
     .status-dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--copper);
-      flex-shrink: 0;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--copper); flex-shrink: 0;
       animation: pulse-dot 2.4s ease-in-out infinite;
     }
     @keyframes pulse-dot {
@@ -182,8 +165,6 @@
       background: #e4e3e1;
       overflow: hidden;
     }
-
-    /* Crop marks — white/translucent on the photo */
     .hero-visual::before, .hero-visual::after,
     .hero-visual-bl, .hero-visual-br {
       content: ''; position: absolute;
@@ -194,15 +175,12 @@
     .hero-visual::after  { top: 28px;    right: 28px; border-top:    1px solid rgba(255,255,255,0.55); border-right:  1px solid rgba(255,255,255,0.55); }
     .hero-visual-bl      { bottom: 28px; left: 28px;  border-bottom: 1px solid rgba(255,255,255,0.55); border-left:   1px solid rgba(255,255,255,0.55); }
     .hero-visual-br      { bottom: 28px; right: 28px; border-bottom: 1px solid rgba(255,255,255,0.55); border-right:  1px solid rgba(255,255,255,0.55); }
-
     .hero-serial {
       position: absolute; top: 36px; right: 44px; z-index: 10;
       font-family: var(--font-mono); font-size: 9px;
       letter-spacing: 0.12em; text-transform: uppercase;
       color: rgba(80,80,80,0.7);
     }
-
-    /* Parallax image wrapper — oversized so the shift stays full-bleed */
     .hero-img-wrap {
       position: absolute;
       inset: -80px -10px;
@@ -214,21 +192,15 @@
       object-position: 52% 28%;
       display: block;
     }
-
-    /* Depth vignette */
     .hero-vignette {
       position: absolute; inset: 0; z-index: 2; pointer-events: none;
       background: radial-gradient(ellipse at 65% 50%, transparent 35%, rgba(0,0,0,0.14) 100%);
     }
-
-    /* Bottom fade into the next section */
     .hero-fade {
       position: absolute; bottom: 0; left: 0; right: 0; height: 100px;
       background: linear-gradient(to bottom, transparent, rgba(228,227,225,0.65));
       z-index: 3; pointer-events: none;
     }
-
-
 
     /* ════ VULNERABILITY ════ */
     .vulnerability { padding: var(--space-16) 0; border-top: 1px solid var(--card-border); }
@@ -312,11 +284,14 @@
     .spec-item { padding: var(--space-3) var(--space-4); border-right: 1px solid rgba(255,255,255,0.08); }
     .spec-item:last-child { border-right: none; }
     .spec-key {
-      font-family: var(--font-mono); font-size: 9px; font-weight: 700;
+      font-family: var(--font-mono); font-size: 12px; font-weight: 700;  /* ↑ was 9px */
       letter-spacing: 0.12em; text-transform: uppercase;
-      color: rgba(255,255,255,0.4); margin-bottom: 8px;
+      color: rgba(255,255,255,0.4); margin-bottom: 10px;
     }
-    .spec-val { font-size: 20px; font-weight: 700; letter-spacing: -0.015em; color: var(--inverse-on-surface); }
+    .spec-val {
+      font-size: 28px; font-weight: 700; letter-spacing: -0.02em;  /* ↑ was 20px */
+      color: var(--inverse-on-surface);
+    }
 
     /* ════ CTA ════ */
     .cta-section {
@@ -390,7 +365,6 @@
       .hero { grid-template-columns: 1fr; min-height: auto; }
       .hero-content { padding: var(--space-12) var(--margin-desktop); padding-top: calc(56px + var(--space-8)); }
       .hero-visual { height: 70vw; min-height: 360px; }
-      .cable-svg-wrap svg { width: 240px; height: 290px; }
       .vulnerability-inner { grid-template-columns: 1fr; gap: var(--space-6); }
       .cards-grid { grid-template-columns: 1fr; }
       .specs-row { grid-template-columns: repeat(2, 1fr); }
@@ -405,6 +379,8 @@
       .stat-block:first-child { border-bottom: 1px solid var(--card-border); }
       .specs-row { grid-template-columns: 1fr 1fr; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
+      .spec-val { font-size: 22px; }
+      .spec-key { font-size: 10px; }
     }
   </style>
 </head>
@@ -459,18 +435,16 @@
       </div>
     </div>
 
-    <!-- HERO VISUAL — product photo with parallax -->
+    <!-- HERO VISUAL -->
     <div class="hero-visual">
       <div class="hero-visual-bl"></div>
       <div class="hero-visual-br"></div>
       <span class="hero-serial">SN // EV-01-0042</span>
-
       <div class="hero-img-wrap" id="heroImgWrap">
         <img src="ev_cable.png"
              alt="VoltArmor EV-01 DC charging gun with black braided armored cable"
              draggable="false"/>
       </div>
-
       <div class="hero-vignette"></div>
       <div class="hero-fade"></div>
     </div>
@@ -570,7 +544,7 @@
           <div class="spec-val">CCS1, CCS2, NACS</div>
         </div>
         <div class="spec-item reveal reveal-delay-4">
-          <div class="spec-key">Safety Standart</div>
+          <div class="spec-key">Certification</div>
           <div class="spec-val">EN388 Level 5</div>
         </div>
       </div>
@@ -579,14 +553,16 @@
 
   <!-- CTA -->
   <section class="cta-section" id="preorder">
-    <div class="cta-watermark" aria-hidden="true">DEFEND</div>
+    <!-- ↓ Updated watermark — product-relevant phrase -->
+    <div class="cta-watermark" aria-hidden="true">CHARGE ON</div>
     <div class="cta-inner">
       <div class="cta-icon reveal">
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
           <path d="M11 2L3 5.5v6c0 4.5 3.5 8 8 9 4.5-1 8-4.5 8-9v-6L11 2z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
         </svg>
       </div>
-      <h2 class="cta-headline reveal reveal-delay-1">JOIN THE DEFENSE</h2>
+      <!-- ↓ Updated headline -->
+      <h2 class="cta-headline reveal reveal-delay-1">KEEP THE FLOW SECURE</h2>
       <p class="cta-sub reveal reveal-delay-2">
         Secure your infrastructure. Sign up for early access and priority deployment of the EV-01 system.
       </p>
@@ -610,9 +586,7 @@
   </footer>
 
   <script>
-    /* ══════════════════════════════════════════════════════
-       SCROLL REVEAL
-    ══════════════════════════════════════════════════════ */
+    /* ── Scroll reveal ── */
     const reveals = document.querySelectorAll('.reveal');
     const revealIO = new IntersectionObserver(entries => {
       entries.forEach(e => {
@@ -626,17 +600,10 @@
       });
     });
 
-    /* ══ PARALLAX — hero image drifts up as user scrolls ══
-       The .hero-img-wrap is inset: -80px so it has room to
-       translate upward without revealing white gaps. Max
-       travel: 80px (matching the inset). Uses rAF lerp for
-       a silky-smooth feel.
-    ════════════════════════════════════════════════════════ */
+    /* ── Parallax ── */
     const heroImgWrap = document.getElementById('heroImgWrap');
     const heroSection = document.querySelector('.hero');
-
     let curParallax = 0, tgtParallax = 0, pRaf = null;
-
     function parallaxScroll() {
       const heroH = heroSection.offsetHeight;
       const prog  = Math.min(Math.max(window.scrollY / heroH, 0), 1);
@@ -647,15 +614,11 @@
       pRaf = null;
       curParallax += (tgtParallax - curParallax) * 0.09;
       heroImgWrap.style.transform = `translateY(-${curParallax.toFixed(2)}px)`;
-      if (Math.abs(tgtParallax - curParallax) > 0.04) {
-        pRaf = requestAnimationFrame(parallaxLoop);
-      }
+      if (Math.abs(tgtParallax - curParallax) > 0.04) pRaf = requestAnimationFrame(parallaxLoop);
     }
     window.addEventListener('scroll', parallaxScroll, { passive: true });
 
-        /* ══════════════════════════════════════════════════════
-       EMAIL FORM
-    ══════════════════════════════════════════════════════ */
+    /* ── Email form ── */
     const emailInput = document.querySelector('.email-input');
     const emailBtn   = document.querySelector('.email-submit');
     emailBtn.addEventListener('click', () => {
