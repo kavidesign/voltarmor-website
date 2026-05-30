@@ -161,15 +161,12 @@
 
     /* ── Hero visual panel ── */
     .hero-visual {
-      position: relative;
-      background: #e4e3e1;
-      overflow: hidden;
+      position: relative; background: #e4e3e1; overflow: hidden;
     }
     .hero-visual::before, .hero-visual::after,
     .hero-visual-bl, .hero-visual-br {
       content: ''; position: absolute;
-      width: 20px; height: 20px; z-index: 10;
-      pointer-events: none;
+      width: 20px; height: 20px; z-index: 10; pointer-events: none;
     }
     .hero-visual::before { top: 28px;    left: 28px;  border-top:    1px solid rgba(255,255,255,0.55); border-left:   1px solid rgba(255,255,255,0.55); }
     .hero-visual::after  { top: 28px;    right: 28px; border-top:    1px solid rgba(255,255,255,0.55); border-right:  1px solid rgba(255,255,255,0.55); }
@@ -178,19 +175,12 @@
     .hero-serial {
       position: absolute; top: 36px; right: 44px; z-index: 10;
       font-family: var(--font-mono); font-size: 9px;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: rgba(80,80,80,0.7);
+      letter-spacing: 0.12em; text-transform: uppercase; color: rgba(80,80,80,0.7);
     }
-    .hero-img-wrap {
-      position: absolute;
-      inset: -80px -10px;
-      will-change: transform;
-    }
+    .hero-img-wrap { position: absolute; inset: -80px -10px; will-change: transform; }
     .hero-img-wrap img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: 52% 28%;
-      display: block;
+      width: 100%; height: 100%; object-fit: cover;
+      object-position: 52% 28%; display: block;
     }
     .hero-vignette {
       position: absolute; inset: 0; z-index: 2; pointer-events: none;
@@ -242,9 +232,9 @@
     }
     .architecture-header { text-align: center; margin-bottom: var(--space-10); }
     .architecture-header .sys-label {
-      font-family: var(--font-mono); font-size: 10px; font-weight: 700;
-      letter-spacing: 0.15em; text-transform: uppercase; color: var(--copper); margin-bottom: var(--space-2);
-      font-size: 12px;
+      font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--copper); margin-bottom: var(--space-2);
     }
     .architecture-header h2 {
       font-size: clamp(28px, 3.5vw, 42px); font-weight: 700;
@@ -276,9 +266,8 @@
     .specs { background: var(--inverse-surface); color: var(--inverse-on-surface); padding: var(--space-10) 0; }
     .specs-inner { max-width: 1200px; margin: 0 auto; padding: 0 var(--margin-desktop); }
     .specs-label {
-      text-align: center; font-family: var(--font-mono); font-size: 10px; font-weight: 700;
+      text-align: center; font-family: var(--font-mono); font-size: 12px; font-weight: 700;
       letter-spacing: 0.15em; text-transform: uppercase; color: var(--outline);
-      font-size: 12px;
       margin-bottom: var(--space-6); padding-bottom: var(--space-6);
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
@@ -286,12 +275,12 @@
     .spec-item { padding: var(--space-3) var(--space-4); border-right: 1px solid rgba(255,255,255,0.08); }
     .spec-item:last-child { border-right: none; }
     .spec-key {
-      font-family: var(--font-mono); font-size: 12px; font-weight: 700;  /* ↑ was 9px */
+      font-family: var(--font-mono); font-size: 12px; font-weight: 700;
       letter-spacing: 0.12em; text-transform: uppercase;
       color: rgba(255,255,255,0.4); margin-bottom: 10px;
     }
     .spec-val {
-      font-size: 28px; font-weight: 700; letter-spacing: -0.02em;  /* ↑ was 20px */
+      font-size: 28px; font-weight: 700; letter-spacing: -0.02em;
       color: var(--inverse-on-surface);
     }
 
@@ -324,8 +313,12 @@
       font-size: 14px; color: var(--on-surface-variant); line-height: 1.65;
       margin-bottom: var(--space-6); max-width: 420px; margin-left: auto; margin-right: auto;
     }
+
+    /* ── Email form ── */
     .email-form {
-      display: flex; max-width: 440px; margin: 0 auto; border: 1px solid var(--card-border);
+      display: flex; max-width: 440px; margin: 0 auto;
+      border: 1px solid var(--card-border);
+      position: relative;
     }
     .email-input {
       flex: 1; background: var(--white); border: none; outline: none;
@@ -333,12 +326,26 @@
       letter-spacing: 0.08em; text-transform: uppercase; color: var(--primary);
     }
     .email-input::placeholder { color: var(--outline); }
+    .email-input:disabled { opacity: 0.5; cursor: not-allowed; }
     .email-submit {
       background: var(--primary); color: var(--on-primary); border: none;
       padding: 14px 18px; display: flex; align-items: center;
-      cursor: pointer; transition: background 0.2s;
+      cursor: pointer; transition: background 0.2s; flex-shrink: 0;
     }
-    .email-submit:hover { background: #333; }
+    .email-submit:hover:not(:disabled) { background: #333; }
+    .email-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* Submission states */
+    .form-msg {
+      margin-top: 12px;
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-align: center; min-height: 18px;
+      transition: opacity 0.3s;
+    }
+    .form-msg.success { color: var(--copper); }
+    .form-msg.error   { color: var(--error); }
+    .form-msg.sending { color: var(--outline); }
 
     /* ════ FOOTER ════ */
     .footer { background: var(--white); border-top: 1px solid var(--card-border); padding: var(--space-6) 0; }
@@ -351,10 +358,7 @@
     .footer-copy { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--outline); }
 
     /* ════ SCROLL REVEAL ════ */
-    .reveal {
-      opacity: 0; transform: translateY(22px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
     .reveal-delay-1 { transition-delay: 0.1s; }
     .reveal-delay-2 { transition-delay: 0.2s; }
@@ -555,7 +559,6 @@
 
   <!-- CTA -->
   <section class="cta-section" id="preorder">
-    <!-- ↓ Updated watermark — product-relevant phrase -->
     <div class="cta-watermark" aria-hidden="true">CHARGE ON</div>
     <div class="cta-inner">
       <div class="cta-icon reveal">
@@ -563,19 +566,29 @@
           <path d="M11 2L3 5.5v6c0 4.5 3.5 8 8 9 4.5-1 8-4.5 8-9v-6L11 2z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
         </svg>
       </div>
-      <!-- ↓ Updated headline -->
       <h2 class="cta-headline reveal reveal-delay-1">KEEP THE FLOW SECURE</h2>
       <p class="cta-sub reveal reveal-delay-2">
         Secure your infrastructure. Sign up for early access and priority deployment of the EV-01 system.
       </p>
-      <div class="email-form reveal reveal-delay-3">
-        <input class="email-input" type="email" placeholder="ENTER EMAIL" aria-label="Email address"/>
-        <button class="email-submit" type="button" aria-label="Submit">
+
+      <!-- Formspree form — posts to https://formspree.io/f/mojbzakv -->
+      <div class="email-form reveal reveal-delay-3" id="emailFormWrap">
+        <input
+          class="email-input"
+          id="emailInput"
+          type="email"
+          placeholder="ENTER EMAIL"
+          aria-label="Email address"
+          autocomplete="email"
+          required
+        />
+        <button class="email-submit" id="emailSubmit" type="button" aria-label="Submit">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
       </div>
+      <p class="form-msg" id="formMsg"></p>
     </div>
   </section>
 
@@ -620,19 +633,70 @@
     }
     window.addEventListener('scroll', parallaxScroll, { passive: true });
 
-    /* ── Email form ── */
-    const emailInput = document.querySelector('.email-input');
-    const emailBtn   = document.querySelector('.email-submit');
-    emailBtn.addEventListener('click', () => {
-      if (emailInput.value && emailInput.value.includes('@')) {
-        emailInput.value = '';
-        emailInput.placeholder = 'DEPLOYMENT REQUEST LOGGED ✓';
-        emailBtn.style.background = '#de593e';
-        setTimeout(() => {
-          emailInput.placeholder = 'ENTER EMAIL';
-          emailBtn.style.background = '';
-        }, 3000);
+    /* ── Formspree email submission ── */
+    const emailInput  = document.getElementById('emailInput');
+    const emailSubmit = document.getElementById('emailSubmit');
+    const formMsg     = document.getElementById('formMsg');
+    const FORMSPREE   = 'https://formspree.io/f/mojbzakv';
+
+    function setMsg(text, type) {
+      formMsg.textContent = text;
+      formMsg.className = 'form-msg ' + type;
+    }
+
+    emailSubmit.addEventListener('click', async () => {
+      const email = emailInput.value.trim();
+
+      /* Basic client-side validation */
+      if (!email || !email.includes('@')) {
+        setMsg('— Enter a valid email address —', 'error');
+        emailInput.focus();
+        return;
       }
+
+      /* Disable controls while submitting */
+      emailInput.disabled  = true;
+      emailSubmit.disabled = true;
+      setMsg('Transmitting…', 'sending');
+
+      try {
+        const res = await fetch(FORMSPREE, {
+          method:  'POST',
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body:    JSON.stringify({ email })
+        });
+
+        if (res.ok) {
+          emailInput.value = '';
+          emailInput.placeholder = 'DEPLOYMENT REQUEST LOGGED ✓';
+          emailSubmit.style.background = '#de593e';
+          setMsg('— Transmission confirmed. Stand by. —', 'success');
+
+          /* Reset after 4 s */
+          setTimeout(() => {
+            emailInput.placeholder = 'ENTER EMAIL';
+            emailInput.disabled    = false;
+            emailSubmit.disabled   = false;
+            emailSubmit.style.background = '';
+            setMsg('', '');
+          }, 4000);
+        } else {
+          const data = await res.json();
+          const err  = data.errors ? data.errors.map(e => e.message).join(', ') : 'Submission failed';
+          setMsg('— ' + err + ' —', 'error');
+          emailInput.disabled  = false;
+          emailSubmit.disabled = false;
+        }
+      } catch (err) {
+        setMsg('— Network error. Please try again. —', 'error');
+        emailInput.disabled  = false;
+        emailSubmit.disabled = false;
+      }
+    });
+
+    /* Allow Enter key to submit */
+    emailInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') emailSubmit.click();
     });
   </script>
 </body>
