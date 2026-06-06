@@ -70,7 +70,7 @@
       background-size: 8px 8px;
     }
 
-    /* ─── STATUS INDICATOR ─── */
+    /* STATUS INDICATOR */
     .status-indicator {
       display: inline-flex; align-items: center; gap: 7px;
       font-family: var(--font-mono); font-size: 10px; font-weight: 700;
@@ -87,7 +87,7 @@
       50%       { opacity: 0.5; transform: scale(0.85); }
     }
 
-    /* ─── BUTTONS ─── */
+    /* BUTTONS */
     .btn-primary {
       display: inline-flex; align-items: center; gap: 10px;
       background: var(--primary); color: var(--on-primary);
@@ -101,7 +101,7 @@
 
     .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 var(--margin-desktop); }
 
-    /* ════ NAV ════ */
+    /* NAV */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: rgba(249,249,249,0.92);
@@ -131,7 +131,7 @@
     }
     .nav-cart:hover { color: var(--primary); }
 
-    /* ════ HERO ════ */
+    /* HERO */
     .hero {
       padding-top: 56px; min-height: 100vh;
       display: grid; grid-template-columns: 1fr 1fr;
@@ -159,7 +159,7 @@
     }
     .hero-price-now { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; color: var(--primary); }
 
-    /* ── Hero visual panel ── */
+    /* Hero visual panel */
     .hero-visual {
       position: relative; background: #e4e3e1; overflow: hidden;
     }
@@ -192,7 +192,7 @@
       z-index: 3; pointer-events: none;
     }
 
-    /* ════ VULNERABILITY ════ */
+    /* VULNERABILITY */
     .vulnerability { padding: var(--space-16) 0; border-top: 1px solid var(--card-border); }
     .vulnerability-inner {
       max-width: 1200px; margin: 0 auto; padding: 0 var(--margin-desktop);
@@ -223,7 +223,7 @@
       letter-spacing: 0.12em; text-transform: uppercase; color: var(--on-surface-variant);
     }
 
-    /* ════ ARCHITECTURE ════ */
+    /* ARCHITECTURE */
     .architecture {
       padding: var(--space-16) 0;
       background: var(--surface-container-low);
@@ -262,7 +262,7 @@
     .arch-card h3 { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 10px; }
     .arch-card p  { font-size: 13px; color: var(--on-surface-variant); line-height: 1.65; }
 
-    /* ════ SPECS (DARK) ════ */
+    /* SPECS DARK */
     .specs { background: var(--inverse-surface); color: var(--inverse-on-surface); padding: var(--space-10) 0; }
     .specs-inner { max-width: 1200px; margin: 0 auto; padding: 0 var(--margin-desktop); }
     .specs-label {
@@ -284,7 +284,7 @@
       color: var(--inverse-on-surface);
     }
 
-    /* ════ CTA ════ */
+    /* CTA */
     .cta-section {
       padding: var(--space-16) 0;
       background: var(--surface-container-low);
@@ -314,7 +314,7 @@
       margin-bottom: var(--space-6); max-width: 420px; margin-left: auto; margin-right: auto;
     }
 
-    /* ── Email form ── */
+    /* Email form */
     .email-form {
       display: flex; max-width: 440px; margin: 0 auto;
       border: 1px solid var(--card-border);
@@ -334,8 +334,6 @@
     }
     .email-submit:hover:not(:disabled) { background: #333; }
     .email-submit:disabled { opacity: 0.6; cursor: not-allowed; }
-
-    /* Submission states */
     .form-msg {
       margin-top: 12px;
       font-family: var(--font-mono); font-size: 10px;
@@ -347,7 +345,7 @@
     .form-msg.error   { color: var(--error); }
     .form-msg.sending { color: var(--outline); }
 
-    /* ════ FOOTER ════ */
+    /* FOOTER */
     .footer { background: var(--white); border-top: 1px solid var(--card-border); padding: var(--space-6) 0; }
     .footer-inner {
       max-width: 1200px; margin: 0 auto; padding: 0 var(--margin-desktop);
@@ -357,7 +355,7 @@
     .footer-logo { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
     .footer-copy { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--outline); }
 
-    /* ════ SCROLL REVEAL ════ */
+    /* SCROLL REVEAL */
     .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
     .reveal-delay-1 { transition-delay: 0.1s; }
@@ -365,7 +363,7 @@
     .reveal-delay-3 { transition-delay: 0.3s; }
     .reveal-delay-4 { transition-delay: 0.4s; }
 
-    /* ════ RESPONSIVE ════ */
+    /* RESPONSIVE */
     @media (max-width: 960px) {
       :root { --margin-desktop: 40px; }
       .hero { grid-template-columns: 1fr; min-height: auto; }
@@ -532,6 +530,8 @@
     </div>
   </section>
 
+  <video src="compare.mov" width="100%" controls style="display:block;"></video>
+
   <!-- SPECS DARK -->
   <section class="specs" id="specs">
     <div class="specs-inner">
@@ -570,8 +570,6 @@
       <p class="cta-sub reveal reveal-delay-2">
         Secure your infrastructure. Sign up for early access and priority deployment of the EV-01 system.
       </p>
-
-      <!-- Formspree form — posts to https://formspree.io/f/mojbzakv -->
       <div class="email-form reveal reveal-delay-3" id="emailFormWrap">
         <input
           class="email-input"
@@ -601,7 +599,7 @@
   </footer>
 
   <script>
-    /* ── Scroll reveal ── */
+    /* Scroll reveal */
     const reveals = document.querySelectorAll('.reveal');
     const revealIO = new IntersectionObserver(entries => {
       entries.forEach(e => {
@@ -615,7 +613,7 @@
       });
     });
 
-    /* ── Parallax ── */
+    /* Parallax */
     const heroImgWrap = document.getElementById('heroImgWrap');
     const heroSection = document.querySelector('.hero');
     let curParallax = 0, tgtParallax = 0, pRaf = null;
@@ -633,7 +631,7 @@
     }
     window.addEventListener('scroll', parallaxScroll, { passive: true });
 
-    /* ── Formspree email submission ── */
+    /* Formspree email submission */
     const emailInput  = document.getElementById('emailInput');
     const emailSubmit = document.getElementById('emailSubmit');
     const formMsg     = document.getElementById('formMsg');
@@ -646,33 +644,25 @@
 
     emailSubmit.addEventListener('click', async () => {
       const email = emailInput.value.trim();
-
-      /* Basic client-side validation */
       if (!email || !email.includes('@')) {
         setMsg('— Enter a valid email address —', 'error');
         emailInput.focus();
         return;
       }
-
-      /* Disable controls while submitting */
       emailInput.disabled  = true;
       emailSubmit.disabled = true;
       setMsg('Transmitting…', 'sending');
-
       try {
         const res = await fetch(FORMSPREE, {
           method:  'POST',
           headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
           body:    JSON.stringify({ email })
         });
-
         if (res.ok) {
           emailInput.value = '';
           emailInput.placeholder = 'DEPLOYMENT REQUEST LOGGED ✓';
           emailSubmit.style.background = '#de593e';
           setMsg('ARMOR RESERVED. STAY CHARGED.', 'success');
-
-          /* Reset after 4 s */
           setTimeout(() => {
             emailInput.placeholder = 'ENTER EMAIL';
             emailInput.disabled    = false;
@@ -694,7 +684,6 @@
       }
     });
 
-    /* Allow Enter key to submit */
     emailInput.addEventListener('keydown', e => {
       if (e.key === 'Enter') emailSubmit.click();
     });
